@@ -31,8 +31,8 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="depoimentos" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
+    <section id="depoimentos" className="py-20 bg-background w-full overflow-hidden">
+      <div className="container mx-auto px-4 max-w-full">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             O que nossos clientes dizem

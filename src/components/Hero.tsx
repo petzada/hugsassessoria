@@ -25,12 +25,12 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-32 pb-16 bg-gradient-to-br from-primary/5 to-background">
-      <div className="absolute inset-0 opacity-10">
+    <section className="relative min-h-screen flex items-center pt-32 pb-16 bg-gradient-to-br from-primary/5 to-background w-full overflow-hidden">
+      <div className="absolute inset-0 opacity-10 w-full">
         <img src={heroImage} alt="Background" className="w-full h-full object-cover" />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 max-w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">

@@ -3,8 +3,8 @@ import aboutImage from "@/assets/about-image.jpg";
 
 const About = () => {
   return (
-    <section id="sobre" className="py-20 bg-primary text-primary-foreground">
-      <div className="container mx-auto px-4">
+    <section id="sobre" className="py-20 bg-primary text-primary-foreground w-full overflow-hidden">
+      <div className="container mx-auto px-4 max-w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <img

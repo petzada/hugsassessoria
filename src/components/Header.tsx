@@ -10,9 +10,9 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background shadow-sm">
-      <div className="bg-primary py-2">
-        <div className="container mx-auto px-4 flex items-center justify-between text-primary-foreground text-sm">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-background shadow-sm w-full">
+      <div className="bg-primary py-2 w-full">
+        <div className="container mx-auto px-4 flex items-center justify-between text-primary-foreground text-sm max-w-full">
           <div className="flex items-center gap-2">
             <Phone className="w-4 h-4" />
             <span>(11) 95353-9103</span>
@@ -31,8 +31,8 @@ const Header = () => {
         </div>
       </div>
       
-      <div className="bg-background border-b">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="bg-background border-b w-full">
+        <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-full">
           <div className="text-2xl font-bold text-primary">
             Hugs Assessoria
           </div>

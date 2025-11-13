@@ -11,8 +11,8 @@ const Footer = () => {
   };
 
   return (
-    <footer id="contato" className="bg-primary-dark text-primary-foreground">
-      <div className="container mx-auto px-4 py-12">
+    <footer id="contato" className="bg-primary-dark text-primary-foreground w-full overflow-hidden">
+      <div className="container mx-auto px-4 py-12 max-w-full">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
             <h3 className="text-2xl font-bold mb-4">Hugs Assessoria</h3>

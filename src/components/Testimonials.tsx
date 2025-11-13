@@ -28,6 +28,18 @@ const Testimonials = () => {
       text: "Processo muito simples e rápido. Em menos de uma semana já tinha a resposta positiva. Estou muito satisfeita com o resultado!",
       rating: 5,
     },
+    {
+      name: "Carlos Oliveira",
+      city: "Campinas - SP",
+      text: "Economizei quase R$ 10.000 no meu empréstimo pessoal. A equipe da Hugs é extremamente profissional e resolveu tudo rapidamente!",
+      rating: 5,
+    },
+    {
+      name: "Fernanda Lima",
+      city: "Curitiba - PR",
+      text: "Excelente serviço! Reduziram meus juros do financiamento do carro e agora consigo pagar com mais tranquilidade. Muito obrigada!",
+      rating: 5,
+    },
   ];
 
   return (

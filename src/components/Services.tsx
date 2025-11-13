@@ -49,10 +49,15 @@ const Services = () => {
         </div>
         
         <div className="text-center">
-          <Button asChild size="lg" className="bg-primary-dark hover:bg-primary-dark/90">
-            <a href="https://wa.me/5511953539103" target="_blank" rel="noopener noreferrer">
-              Solicite sua análise agora
-            </a>
+          <Button 
+            size="lg" 
+            className="bg-primary-dark hover:bg-primary-dark/90"
+            onClick={() => {
+              const element = document.querySelector('section');
+              if (element) element.scrollIntoView({ behavior: "smooth" });
+            }}
+          >
+            Solicite sua análise agora
           </Button>
         </div>
       </div>

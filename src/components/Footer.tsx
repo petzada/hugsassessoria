@@ -1,4 +1,5 @@
 import { MapPin, Clock, MessageCircle, Phone } from "lucide-react";
+import hugsLogo from "@/assets/hugs-logo.png";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -15,7 +16,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12 max-w-full">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-2xl font-bold mb-4">Hugs Assessoria</h3>
+            <img src={hugsLogo} alt="Hugs Assessoria" className="h-16 md:h-20 w-auto mb-4" />
             <p className="opacity-90">
               Especialistas em revisão de juros abusivos, trabalhando para garantir que você pague apenas o justo.
             </p>
@@ -63,15 +64,15 @@ const Footer = () => {
                 <Phone className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
                   <p className="font-medium">SAC:</p>
-                  <a href="tel:1195353-9103" className="opacity-90 hover:opacity-100">
-                    (11) 95353-9103
+                  <a href="tel:11958264333" className="opacity-90 hover:opacity-100">
+                    (11) 95826-4333
                   </a>
                 </div>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="opacity-90">São Paulo - SP</p>
+                  <p className="opacity-90">Suzano - SP</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">

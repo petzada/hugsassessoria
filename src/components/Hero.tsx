@@ -12,21 +12,22 @@ const Hero = () => {
     name: "",
     phone: "",
     service: "",
+    installmentValue: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.service) {
+    if (!formData.name || !formData.phone || !formData.service || !formData.installmentValue) {
       toast.error("Por favor, preencha todos os campos");
       return;
     }
     toast.success("Solicitação enviada! Entraremos em contato em breve.");
-    setFormData({ name: "", phone: "", service: "" });
+    setFormData({ name: "", phone: "", service: "", installmentValue: "" });
   };
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-16 bg-gradient-to-br from-primary/5 to-background w-full overflow-hidden">
-      <div className="absolute inset-0 opacity-10 w-full">
+      <div className="absolute inset-0 opacity-30 w-full">
         <img src={heroImage} alt="Background" className="w-full h-full object-cover" />
       </div>
       
@@ -93,6 +94,17 @@ const Hero = () => {
                     <SelectItem value="pessoal">Empréstimo pessoal</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="installmentValue">Qual valor da sua parcela?</Label>
+                <Input
+                  id="installmentValue"
+                  value={formData.installmentValue}
+                  onChange={(e) => setFormData({ ...formData, installmentValue: e.target.value })}
+                  placeholder="R$ 0,00"
+                  className="mt-1"
+                />
               </div>
               
               <Button type="submit" className="w-full bg-primary-dark hover:bg-primary-dark/90">

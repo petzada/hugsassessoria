@@ -1,5 +1,6 @@
 import { Phone, Facebook, Instagram, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import hugsLogo from "@/assets/hugs-logo.png";
 
 const Header = () => {
   const scrollToSection = (id: string) => {
@@ -18,10 +19,10 @@ const Header = () => {
             <span>(11) 95353-9103</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+            <a href="https://www.facebook.com/hugsassessoria" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
               <Facebook className="w-4 h-4" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+            <a href="https://www.instagram.com/hugsreducaodejuros/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
               <Instagram className="w-4 h-4" />
             </a>
             <a href="https://wa.me/5511953539103" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
@@ -33,19 +34,19 @@ const Header = () => {
       
       <div className="bg-background border-b w-full">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-full">
-          <div className="text-2xl font-bold text-primary">
-            Hugs Assessoria
+          <div className="flex items-center">
+            <img src={hugsLogo} alt="Hugs Assessoria" className="h-12 md:h-14 w-auto" />
           </div>
           
           <nav className="hidden md:flex items-center gap-6">
-            <button onClick={() => scrollToSection("sobre")} className="text-foreground hover:text-primary transition-colors">
-              Sobre nós
-            </button>
             <button onClick={() => scrollToSection("servicos")} className="text-foreground hover:text-primary transition-colors">
               Serviços
             </button>
-            <button onClick={() => scrollToSection("depoimentos")} className="text-foreground hover:text-primary transition-colors">
-              Depoimentos
+            <button onClick={() => scrollToSection("sobre")} className="text-foreground hover:text-primary transition-colors">
+              Sobre nós
+            </button>
+            <button onClick={() => scrollToSection("duvidas")} className="text-foreground hover:text-primary transition-colors">
+              Dúvidas
             </button>
             <button onClick={() => scrollToSection("contato")} className="text-foreground hover:text-primary transition-colors">
               Contato

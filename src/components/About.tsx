@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
 import aboutImage from "@/assets/about-image.jpg";
+import { Shield, Award, CheckCircle2, TrendingDown } from "lucide-react";
 
 const About = () => {
   return (
@@ -24,9 +24,25 @@ const About = () => {
             <p className="text-lg opacity-90">
               Nossa equipe é formada por profissionais experientes que trabalham incansavelmente para garantir que você pague apenas o justo pelo seu financiamento.
             </p>
-            <Button size="lg" variant="secondary" className="bg-background text-primary hover:bg-background/90">
-              Saiba mais sobre nossa história
-            </Button>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-4">
+              <div className="flex flex-col items-center gap-2 p-4 bg-background/10 rounded-lg">
+                <Shield className="w-10 h-10" />
+                <span className="text-sm text-center font-semibold">100% Seguro</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 bg-background/10 rounded-lg">
+                <Award className="w-10 h-10" />
+                <span className="text-sm text-center font-semibold">Certificado</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 bg-background/10 rounded-lg">
+                <CheckCircle2 className="w-10 h-10" />
+                <span className="text-sm text-center font-semibold">Aprovado</span>
+              </div>
+              <div className="flex flex-col items-center gap-2 p-4 bg-background/10 rounded-lg">
+                <TrendingDown className="w-10 h-10" />
+                <span className="text-sm text-center font-semibold">Juros Reduzidos</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

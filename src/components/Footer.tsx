@@ -1,18 +1,16 @@
 import { MapPin, Clock, MessageCircle, Phone } from "lucide-react";
 import hugsLogo from "@/assets/hugs-logo.png";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   };
-
-  return (
-    <footer id="contato" className="bg-primary-dark text-primary-foreground w-full overflow-hidden">
+  return <footer id="contato" className="bg-primary-dark text-primary-foreground w-full overflow-hidden">
       <div className="container mx-auto px-4 py-12 max-w-full">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div>
@@ -72,7 +70,7 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="opacity-90">Suzano - SP</p>
+                  <p className="opacity-90">Rua Campos Salles, 267 - Suzano/SP</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">
@@ -95,8 +93,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;

@@ -33,15 +33,15 @@ const Hero = () => {
       
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          <div className="space-y-6 flex flex-col items-center lg:items-start">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center lg:text-left max-w-2xl">
+          <div className="space-y-6 flex flex-col items-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center max-w-2xl">
               Revisão de juros de veículos, imóveis e empréstimo pessoal
             </h1>
-            <p className="text-xl text-muted-foreground text-center lg:text-left max-w-xl">
+            <p className="text-xl text-muted-foreground text-center max-w-xl">
               Atendimento rápido, soluções simplificadas e garantia total de serviço.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center lg:items-start">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center">
               <Button asChild size="lg" className="bg-success hover:bg-success/90 w-full sm:w-auto">
                 <a href="https://wa.me/5511953539103" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <MessageCircle className="w-5 h-5" />

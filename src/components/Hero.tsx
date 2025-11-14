@@ -31,18 +31,18 @@ const Hero = () => {
         <img src={heroImage} alt="Background" className="w-full h-full object-cover" />
       </div>
       
-      <div className="container mx-auto px-4 relative z-10 max-w-full">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center md:text-left">
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          <div className="space-y-6 flex flex-col items-center lg:items-start">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center lg:text-left max-w-2xl">
               Revisão de juros de veículos, imóveis e empréstimo pessoal
             </h1>
-            <p className="text-xl text-muted-foreground text-center md:text-left">
+            <p className="text-xl text-muted-foreground text-center lg:text-left max-w-xl">
               Atendimento rápido, soluções simplificadas e garantia total de serviço.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="bg-success hover:bg-success/90">
+            <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center lg:items-start">
+              <Button asChild size="lg" className="bg-success hover:bg-success/90 w-full sm:w-auto">
                 <a href="https://wa.me/5511953539103" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2">
                   <MessageCircle className="w-5 h-5" />
                   Fale com um especialista
@@ -51,14 +51,14 @@ const Hero = () => {
               <Button size="lg" variant="outline" onClick={() => {
                 const element = document.getElementById("contato");
                 if (element) element.scrollIntoView({ behavior: "smooth" });
-              }}>
+              }} className="w-full sm:w-auto">
                 Solicitar análise gratuita
               </Button>
             </div>
           </div>
           
-          <div className="bg-card p-6 lg:p-8 rounded-2xl shadow-lg border max-w-lg lg:max-w-md mx-auto lg:mx-0">
-            <h3 className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6 text-foreground">Solicite sua análise gratuita</h3>
+          <div className="bg-card p-6 lg:p-8 rounded-2xl shadow-lg border w-full max-w-md mx-auto lg:ml-auto lg:mr-0">
+            <h3 className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6 text-foreground text-center">Solicite sua análise gratuita</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="name">Nome completo</Label>

@@ -86,7 +86,7 @@ const Footer = () => {
         
         <div className="border-t border-primary-foreground/20 pt-8 text-center">
           <p className="opacity-90">
-            © {currentYear} Hugs Assessoria. Todos os direitos reservados.
+            © {currentYear} Hugs Assessoria. CNPJ: 42.946.879/0001-09. Todos os direitos reservados.
           </p>
           <p className="text-sm opacity-75 mt-2">
             Este site utiliza cookies para melhorar sua experiência de navegação.

@@ -5,24 +5,26 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MessageCircle, Shield } from "lucide-react";
 import { toast } from "sonner";
+import InputMask from "react-input-mask";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
+    email: "",
     service: "",
     installmentValue: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.service || !formData.installmentValue) {
+    if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.installmentValue) {
       toast.error("Por favor, preencha todos os campos");
       return;
     }
     toast.success("Solicitação enviada! Entraremos em contato em breve.");
-    setFormData({ name: "", phone: "", service: "", installmentValue: "" });
+    setFormData({ name: "", phone: "", email: "", service: "", installmentValue: "" });
   };
 
   return (
@@ -49,8 +51,8 @@ const Hero = () => {
                 </a>
               </Button>
               <Button size="lg" variant="outline" onClick={() => {
-                const element = document.getElementById("contato");
-                if (element) element.scrollIntoView({ behavior: "smooth" });
+                const element = document.querySelector(".bg-card");
+                if (element) element.scrollIntoView({ behavior: "smooth", block: "center" });
               }} className="w-full sm:w-auto">
                 Solicitar análise gratuita
               </Button>
@@ -67,23 +69,45 @@ const Hero = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="Digite seu nome"
+                  maxLength={100}
                   className="mt-1"
                 />
               </div>
               
               <div>
                 <Label htmlFor="phone">Telefone (WhatsApp)</Label>
-                <Input
-                  id="phone"
+                <InputMask
+                  mask="(99) 99999-9999"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="(11) 99999-9999"
+                >
+                  {(inputProps: any) => (
+                    <Input
+                      {...inputProps}
+                      id="phone"
+                      type="tel"
+                      placeholder="(11) 99999-9999"
+                      className="mt-1"
+                    />
+                  )}
+                </InputMask>
+              </div>
+
+              <div>
+                <Label htmlFor="email">E-mail</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="seu@email.com"
+                  maxLength={100}
                   className="mt-1"
                 />
               </div>
               
               <div>
-                <Label htmlFor="service">Tipo de revisão</Label>
+                <Label htmlFor="service">Tipo de serviço</Label>
                 <Select value={formData.service} onValueChange={(value) => setFormData({ ...formData, service: value })}>
                   <SelectTrigger className="mt-1">
                     <SelectValue placeholder="Selecione o serviço" />
@@ -98,13 +122,21 @@ const Hero = () => {
 
               <div>
                 <Label htmlFor="installmentValue">Qual valor da sua parcela?</Label>
-                <Input
-                  id="installmentValue"
+                <InputMask
+                  mask="R$ 9999999"
+                  maskChar=""
                   value={formData.installmentValue}
                   onChange={(e) => setFormData({ ...formData, installmentValue: e.target.value })}
-                  placeholder="R$ 0,00"
-                  className="mt-1"
-                />
+                >
+                  {(inputProps: any) => (
+                    <Input
+                      {...inputProps}
+                      id="installmentValue"
+                      placeholder="R$ 0"
+                      className="mt-1"
+                    />
+                  )}
+                </InputMask>
               </div>
               
               <Button type="submit" className="w-full bg-primary-dark hover:bg-primary-dark/90">

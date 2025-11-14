@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { toast } from "sonner";
 import { Shield } from "lucide-react";
 
@@ -14,19 +13,16 @@ const Admin = () => {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setSession(session);
         setUser(session?.user ?? null);
         
-        // Check if user is admin after auth state changes
         if (session?.user) {
           setTimeout(() => {
             checkAdminStatus(session.user.id);
@@ -35,7 +31,6 @@ const Admin = () => {
       }
     );
 
-    // THEN check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -60,71 +55,44 @@ const Admin = () => {
         .maybeSingle();
 
       if (error) {
-        console.error("Error checking admin status:", error);
         toast.error("Erro ao verificar permissões");
         await supabase.auth.signOut();
-        return;
+        setLoading(false);
+        return false;
       }
 
       if (!data) {
         toast.error("Acesso negado. Você não tem permissões de administrador.");
         await supabase.auth.signOut();
-        return;
+        setLoading(false);
+        return false;
       }
 
-      // User is admin, redirect to dashboard
       navigate("/admin/dashboard");
+      return true;
     } catch (err) {
-      console.error("Error:", err);
       toast.error("Erro ao verificar permissões");
-    } finally {
       setLoading(false);
+      return false;
     }
   };
 
-  const handleAuth = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     try {
-      if (isLogin) {
-        const { error } = await supabase.auth.signInWithPassword({
-          email,
-          password,
-        });
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
 
-        if (error) throw error;
-        toast.success("Login realizado com sucesso!");
-      } else {
-        const { data, error } = await supabase.auth.signUp({
-          email,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/admin`,
-          },
-        });
+      if (error) throw error;
 
-        if (error) throw error;
-
-        if (data.user) {
-          // Create admin role for the new user
-          const { error: roleError } = await supabase
-            .from("user_roles")
-            .insert({ user_id: data.user.id, role: "admin" });
-
-          if (roleError) {
-            console.error("Error creating admin role:", roleError);
-            toast.error("Erro ao criar permissões de administrador");
-            return;
-          }
-
-          toast.success("Conta criada com sucesso!");
-        }
+      if (data.user) {
+        await checkAdminStatus(data.user.id);
       }
     } catch (error: any) {
-      toast.error(error.message || "Erro na autenticação");
-    } finally {
-      setLoading(false);
+      toast.error(error.message || "Erro ao fazer login");
     }
   };
 
@@ -143,86 +111,41 @@ const Admin = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-background p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <div className="flex justify-center mb-4">
-            <Shield className="w-12 h-12 text-primary" />
+          <div className="mx-auto mb-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+            <Shield className="w-6 h-6 text-primary" />
           </div>
-          <CardTitle className="text-2xl">Área Administrativa</CardTitle>
+          <CardTitle className="text-2xl">Admin Login</CardTitle>
           <CardDescription>
-            Acesso restrito a administradores
+            Entre com suas credenciais de administrador
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Tabs value={isLogin ? "login" : "register"} onValueChange={(v) => setIsLogin(v === "login")}>
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="login">Login</TabsTrigger>
-              <TabsTrigger value="register">Registrar</TabsTrigger>
-            </TabsList>
-            
-            <TabsContent value="login">
-              <form onSubmit={handleAuth} className="space-y-4 mt-4">
-                <div>
-                  <Label htmlFor="login-email">E-mail</Label>
-                  <Input
-                    id="login-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@exemplo.com"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="login-password">Senha</Label>
-                  <Input
-                    id="login-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Entrando..." : "Entrar"}
-                </Button>
-              </form>
-            </TabsContent>
-            
-            <TabsContent value="register">
-              <form onSubmit={handleAuth} className="space-y-4 mt-4">
-                <div>
-                  <Label htmlFor="register-email">E-mail</Label>
-                  <Input
-                    id="register-email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="admin@exemplo.com"
-                    required
-                    className="mt-1"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="register-password">Senha</Label>
-                  <Input
-                    id="register-password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                    minLength={6}
-                    className="mt-1"
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={loading}>
-                  {loading ? "Criando conta..." : "Criar conta"}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="admin@example.com"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                id="password"
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <Button type="submit" className="w-full">
+              Entrar
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>

@@ -8,6 +8,40 @@ import { toast } from "sonner";
 import InputMask from "react-input-mask";
 import { supabase } from "@/integrations/supabase/client";
 import heroImage from "@/assets/hero-bg.jpg";
+import { z } from "zod";
+
+const leadFormSchema = z.object({
+  name: z.string()
+    .trim()
+    .min(2, "Nome deve ter pelo menos 2 caracteres")
+    .max(100, "Nome muito longo")
+    .regex(/^[a-zA-ZÀ-ÿ\s]+$/, "Nome deve conter apenas letras"),
+  
+  phone: z.string()
+    .trim()
+    .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/, "Telefone inválido"),
+  
+  email: z.string()
+    .trim()
+    .max(100, "Email muito longo")
+    .email("Email inválido")
+    .toLowerCase(),
+  
+  service: z.enum(["veiculo", "imovel", "pessoal"], {
+    errorMap: () => ({ message: "Selecione um tipo de serviço" })
+  }),
+  
+  installmentValue: z.string()
+    .trim()
+    .regex(/^R\$\s\d{1,7}$/, "Valor inválido")
+    .refine(
+      (val) => {
+        const num = parseInt(val.replace(/\D/g, ''));
+        return num > 0 && num < 10000000;
+      },
+      "Valor deve estar entre R$ 1 e R$ 9.999.999"
+    )
+});
 
 const Hero = () => {
   const [formData, setFormData] = useState({
@@ -21,18 +55,23 @@ const Hero = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.installmentValue) {
-      toast.error("Por favor, preencha todos os campos");
+    const result = leadFormSchema.safeParse(formData);
+    
+    if (!result.success) {
+      const firstError = result.error.errors[0];
+      toast.error(firstError.message);
       return;
     }
 
+    const validatedData = result.data;
+
     try {
       const { error } = await supabase.from("leads").insert({
-        name: formData.name,
-        phone: formData.phone,
-        email: formData.email,
-        service: formData.service,
-        installment_value: formData.installmentValue,
+        name: validatedData.name,
+        phone: validatedData.phone,
+        email: validatedData.email,
+        service: validatedData.service,
+        installment_value: validatedData.installmentValue,
       });
 
       if (error) throw error;
@@ -40,7 +79,6 @@ const Hero = () => {
       toast.success("Solicitação enviada! Entraremos em contato em breve.");
       setFormData({ name: "", phone: "", email: "", service: "", installmentValue: "" });
     } catch (error: any) {
-      console.error("Error submitting form:", error);
       toast.error("Erro ao enviar solicitação. Tente novamente.");
     }
   };

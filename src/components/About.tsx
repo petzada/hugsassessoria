@@ -1,4 +1,4 @@
-import aboutImage from "@/assets/about-image.jpg";
+import aboutImage from "@/assets/about-new-image.jpg";
 import { Shield, Award, CheckCircle2, TrendingDown } from "lucide-react";
 
 const About = () => {

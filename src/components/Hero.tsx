@@ -27,7 +27,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-16 bg-gradient-to-br from-primary/5 to-background w-full overflow-hidden">
-      <div className="absolute inset-0 opacity-50 w-full lg:left-0 lg:right-auto lg:w-[60%]">
+      <div className="absolute inset-0 opacity-30 w-full">
         <img src={heroImage} alt="Background" className="w-full h-full object-cover" />
       </div>
       

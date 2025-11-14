@@ -70,7 +70,7 @@ const Footer = () => {
               <li className="flex items-start gap-2">
                 <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" />
                 <div className="text-left">
-                  <p className="opacity-90">Suzano - SP</p>
+                  <p className="opacity-90">Rua Campos Salles, 267 - Suzano/SP - CEP 08674-020</p>
                 </div>
               </li>
               <li className="flex items-start gap-2">

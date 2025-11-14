@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { MessageCircle, Shield } from "lucide-react";
 import { toast } from "sonner";
 import InputMask from "react-input-mask";
+import { supabase } from "@/integrations/supabase/client";
 import heroImage from "@/assets/hero-bg.jpg";
 
 const Hero = () => {
@@ -17,14 +18,31 @@ const Hero = () => {
     installmentValue: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!formData.name || !formData.phone || !formData.email || !formData.service || !formData.installmentValue) {
       toast.error("Por favor, preencha todos os campos");
       return;
     }
-    toast.success("Solicitação enviada! Entraremos em contato em breve.");
-    setFormData({ name: "", phone: "", email: "", service: "", installmentValue: "" });
+
+    try {
+      const { error } = await supabase.from("leads").insert({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        service: formData.service,
+        installment_value: formData.installmentValue,
+      });
+
+      if (error) throw error;
+
+      toast.success("Solicitação enviada! Entraremos em contato em breve.");
+      setFormData({ name: "", phone: "", email: "", service: "", installmentValue: "" });
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      toast.error("Erro ao enviar solicitação. Tente novamente.");
+    }
   };
 
   return (

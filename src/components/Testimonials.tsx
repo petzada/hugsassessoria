@@ -57,15 +57,15 @@ const Testimonials = () => {
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                 <Card className="h-full">
                   <CardContent className="p-6 space-y-4">
-                    <div className="flex gap-1">
+                    <div className="flex gap-1 justify-center md:justify-start">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star key={i} className="w-5 h-5 fill-primary text-primary" />
                       ))}
                     </div>
-                    <p className="text-muted-foreground italic">
+                    <p className="text-muted-foreground italic text-center md:text-left">
                       "{testimonial.text}"
                     </p>
-                    <div>
+                    <div className="text-center md:text-left">
                       <p className="font-semibold text-foreground">{testimonial.name}</p>
                       <p className="text-sm text-muted-foreground">{testimonial.city}</p>
                     </div>

@@ -27,17 +27,17 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center pt-32 pb-16 bg-gradient-to-br from-primary/5 to-background w-full overflow-hidden">
-      <div className="absolute inset-0 opacity-30 w-full">
+      <div className="absolute inset-0 opacity-50 w-full lg:left-0 lg:right-auto lg:w-[60%]">
         <img src={heroImage} alt="Background" className="w-full h-full object-cover" />
       </div>
       
       <div className="container mx-auto px-4 relative z-10 max-w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-center md:text-left">
               Revisão de juros de veículos, imóveis e empréstimo pessoal
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground text-center md:text-left">
               Atendimento rápido, soluções simplificadas e garantia total de serviço.
             </p>
             
@@ -57,8 +57,8 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="bg-card p-8 rounded-2xl shadow-lg border">
-            <h3 className="text-2xl font-semibold mb-6 text-foreground">Solicite sua análise gratuita</h3>
+          <div className="bg-card p-6 lg:p-8 rounded-2xl shadow-lg border max-w-lg lg:max-w-md mx-auto lg:mx-0">
+            <h3 className="text-xl lg:text-2xl font-semibold mb-4 lg:mb-6 text-foreground">Solicite sua análise gratuita</h3>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="name">Nome completo</Label>

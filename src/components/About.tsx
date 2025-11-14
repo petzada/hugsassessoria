@@ -15,13 +15,13 @@ const About = () => {
           </div>
           
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className="text-3xl md:text-4xl font-bold text-center md:text-left">
               Sobre a Hugs Assessoria
             </h2>
-            <p className="text-lg opacity-90">
+            <p className="text-lg opacity-90 text-center md:text-left">
               Somos especialistas na redução de juros em três modalidades, garantindo a transparência nas negociações e a satisfação de todos os atendimentos.
             </p>
-            <p className="text-lg opacity-90">
+            <p className="text-lg opacity-90 text-center md:text-left">
               Nossa equipe é formada por profissionais experientes que trabalham incansavelmente para garantir que você pague apenas o justo pelo seu financiamento.
             </p>
             

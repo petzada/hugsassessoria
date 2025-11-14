@@ -38,10 +38,10 @@ const Benefits = () => {
               <div className="w-20 h-20 bg-primary rounded-full flex items-center justify-center mx-auto mb-6">
                 <benefit.icon className="w-10 h-10 text-primary-foreground" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-foreground">
+              <h3 className="text-xl font-semibold mb-3 text-foreground text-center">
                 {benefit.title}
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-center">
                 {benefit.description}
               </p>
             </div>

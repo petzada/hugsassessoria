@@ -55,6 +55,9 @@ const Admin = () => {
         .maybeSingle();
 
       if (error) {
+        if (import.meta.env.DEV) {
+          console.error("Admin check error:", error);
+        }
         toast.error("Erro ao verificar permissões");
         await supabase.auth.signOut();
         setLoading(false);
@@ -71,6 +74,9 @@ const Admin = () => {
       navigate("/admin/dashboard");
       return true;
     } catch (err) {
+      if (import.meta.env.DEV) {
+        console.error("Unexpected error in auth check");
+      }
       toast.error("Erro ao verificar permissões");
       setLoading(false);
       return false;

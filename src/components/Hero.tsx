@@ -74,7 +74,12 @@ const Hero = () => {
         installment_value: validatedData.installmentValue,
       });
 
-      if (error) throw error;
+      if (error) {
+        if (import.meta.env.DEV) {
+          console.error("Lead submission error:", error.message);
+        }
+        throw error;
+      }
 
       toast.success("Solicitação enviada! Entraremos em contato em breve.");
       setFormData({ name: "", phone: "", email: "", service: "", installmentValue: "" });

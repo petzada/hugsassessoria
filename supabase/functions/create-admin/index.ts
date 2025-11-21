@@ -57,16 +57,67 @@ Deno.serve(async (req) => {
 
     const { email, password } = await req.json()
 
-    if (!email || !password) {
+    // Validate email
+    if (!email || typeof email !== 'string') {
       return new Response(
-        JSON.stringify({ error: 'Email and password are required' }),
+        JSON.stringify({ error: 'Email is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const trimmedEmail = email.trim().toLowerCase()
+    
+    if (trimmedEmail.length > 255) {
+      return new Response(
+        JSON.stringify({ error: 'Email too long (max 255 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedEmail)) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid email format' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       )
     }
 
-    // Create the new admin user
+    // Validate password
+    if (!password || typeof password !== 'string') {
+      return new Response(
+        JSON.stringify({ error: 'Password is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    if (password.length < 8) {
+      return new Response(
+        JSON.stringify({ error: 'Password must be at least 8 characters' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    if (password.length > 72) {
+      return new Response(
+        JSON.stringify({ error: 'Password too long (max 72 characters)' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+    
+    const hasUpperCase = /[A-Z]/.test(password)
+    const hasLowerCase = /[a-z]/.test(password)
+    const hasNumbers = /\d/.test(password)
+    
+    if (!hasUpperCase || !hasLowerCase || !hasNumbers) {
+      return new Response(
+        JSON.stringify({ error: 'Password must contain uppercase, lowercase, and numbers' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Create the new admin user with validated email
     const { data: newUser, error: signUpError } = await supabaseClient.auth.admin.createUser({
-      email,
+      email: trimmedEmail,
       password,
       email_confirm: true
     })

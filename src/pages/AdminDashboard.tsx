@@ -93,8 +93,10 @@ const AdminDashboard = () => {
     }
 
     if (filterDateTo) {
-      filtered = filtered.filter(lead => 
-        new Date(lead.created_at) <= new Date(filterDateTo)
+      const endOfDay = new Date(filterDateTo);
+      endOfDay.setHours(23, 59, 59, 999);
+      filtered = filtered.filter(lead =>
+        new Date(lead.created_at) <= endOfDay
       );
     }
 
@@ -133,6 +135,15 @@ const AdminDashboard = () => {
     toast.success("Logout realizado com sucesso");
   };
 
+  const getServiceName = (service: string): string => {
+    const serviceNames: Record<string, string> = {
+      veiculo: "Financiamento de veículos",
+      imovel: "Financiamento de imóveis",
+      pessoal: "Empréstimo pessoal"
+    };
+    return serviceNames[service] || service;
+  };
+
   const exportToCSV = () => {
     if (filteredLeads.length === 0) {
       toast.error("Nenhum lead para exportar");
@@ -144,7 +155,7 @@ const AdminDashboard = () => {
       lead.name,
       lead.phone,
       lead.email,
-      lead.service,
+      getServiceName(lead.service),
       lead.installment_value,
       format(new Date(lead.created_at), "dd/MM/yyyy HH:mm", { locale: ptBR })
     ]);
@@ -302,11 +313,7 @@ const AdminDashboard = () => {
                         <TableCell className="font-medium">{lead.name}</TableCell>
                         <TableCell>{lead.phone}</TableCell>
                         <TableCell>{lead.email}</TableCell>
-                        <TableCell>
-                          {lead.service === "veiculo" && "Financiamento de veículos"}
-                          {lead.service === "imovel" && "Financiamento de imóveis"}
-                          {lead.service === "pessoal" && "Empréstimo pessoal"}
-                        </TableCell>
+                        <TableCell>{getServiceName(lead.service)}</TableCell>
                         <TableCell>{lead.installment_value}</TableCell>
                         <TableCell>
                           {format(new Date(lead.created_at), "dd/MM/yyyy HH:mm", { locale: ptBR })}

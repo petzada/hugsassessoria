@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
+# Hugs Assessoria
 
-## Project info
+![Status](https://img.shields.io/badge/status-conclu%C3%ADdo-blue) ![Licença](https://img.shields.io/badge/licen%C3%A7a-MIT-green) ![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black) ![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)
 
-**URL**: https://lovable.dev/projects/ed1c1d4b-0e11-49f3-b3fb-a9731139f36d
+Site institucional da **Hugs Assessoria**, especializada em **revisão de juros abusivos** em financiamentos de veículos, imóveis e empréstimos: apresenta os serviços e capta contatos de clientes.
 
-## How can I edit this code?
+## Status do projeto
 
-There are several ways of editing your application.
+🔵 **Concluído**: o site foi entregue e publicado; o último commit (fevereiro de 2026) removeu código sem uso.
 
-**Use Lovable**
+## Demonstração
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/ed1c1d4b-0e11-49f3-b3fb-a9731139f36d) and start prompting.
+**Página pública** (landing page)
+- Hero com chamada principal, seções **Sobre**, **Serviços** e **Benefícios**.
+- **Depoimentos** em carrossel e **perguntas frequentes**.
+- Formulário de contato com máscara de telefone e **botão flutuante do WhatsApp**.
 
-Changes made via Lovable will be committed automatically to this repo.
+**Área administrativa** (`/admin`)
+- Login de administrador e painel com os contatos recebidos pelo formulário.
+- Admins criados por uma Edge Function do Supabase (`create-admin`).
 
-**Use your preferred IDE**
+## Tecnologias utilizadas
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- **React 18** + **TypeScript** + **Vite**
+- **Tailwind CSS** + **shadcn/ui** (Radix), Embla Carousel
+- **React Router**, **Zod**
+- **Supabase** (banco, autenticação e Edge Functions)
+- Hospedagem estática na **HostGator** (Apache com `.htaccess`)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Pré-requisitos e instalação
 
-Follow these steps:
+**Pré-requisitos**
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- **Node.js 18** ou superior e npm
+- Um projeto Supabase (já referenciado no `.env` do repositório, com chaves públicas de front-end)
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+**Instalação**
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+git clone https://github.com/petzada/hugsassessoria.git
+cd hugsassessoria
+npm install
 ```
 
-**Edit a file directly in GitHub**
+Para usar outro projeto Supabase, troque `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY` e `VITE_SUPABASE_PROJECT_ID` no `.env` e rode `migration.sql` no SQL Editor.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Como utilizar
 
-**Use GitHub Codespaces**
+```bash
+npm run dev       # http://localhost:8080
+npm run build     # gera a pasta dist/
+npm run preview   # serve o build localmente
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Para publicar na HostGator, envie o conteúdo de `dist/` para o `public_html` (o `.htaccess` em `public/` cuida das rotas do React Router). Passo a passo em [`DEPLOY-HOSTGATOR.md`](DEPLOY-HOSTGATOR.md).
 
-## What technologies are used for this project?
+## Testes
 
-This project is built with:
+O projeto **não tem testes automatizados**. A verificação disponível é o lint:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```bash
+npm run lint
+```
 
-## How can I deploy this project?
+## Contribuição
 
-Simply open [Lovable](https://lovable.dev/projects/ed1c1d4b-0e11-49f3-b3fb-a9731139f36d) and click on Share -> Publish.
+Contribuições são bem-vindas! Para propor uma melhoria:
 
-## Can I connect a custom domain to my Lovable project?
+1. Abra uma **issue** descrevendo o problema ou a ideia antes de começar algo grande.
+2. Faça um **fork** e crie um branch a partir da `main`: `<tipo>/<nome-kebab>` (`feat`, `fix`, `docs`, `refactor`, `test`, `chore`).
+3. Use **commits semânticos** em português: `<tipo>(<escopo>): <descrição no imperativo>`.
+4. Rode lint e testes antes de enviar (veja [Testes](#testes)).
+5. Abra o **Pull Request** em *draft*, explicando o quê e o porquê. O merge é feito pelo autor.
 
-Yes, you can!
+Não inclua segredos (`.env`, chaves de API, tokens) em commits ou PRs.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Licença
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+Distribuído sob a licença **MIT**, de código aberto. Isso significa que você **pode** usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e até vender cópias do código, inclusive em projetos comerciais, **desde que** mantenha o aviso de copyright e o texto da licença. O software é fornecido "no estado em que se encontra", **sem garantias**, e o autor não se responsabiliza por danos decorrentes do uso.
+
+Texto completo em [`LICENSE`](LICENSE).
+
+## Autor e contato
+
+**Marcio Petigrosso** ("petzada"): idealização e desenvolvimento.
+
+- GitHub: [@petzada](https://github.com/petzada)
+- LinkedIn: [in/petigrosso](https://www.linkedin.com/in/petigrosso)
